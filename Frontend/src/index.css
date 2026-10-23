@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* Design System - Obsidian Neon Retrofuturistic */
+:root {
+  --font-geist: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --color-void: #050505;
+  --color-violet-neon: #8b5cf6;
+  --color-emerald-neon: #10b981;
+  --color-rose-neon: #f43f5e;
+  
+  --bg-glass: rgba(255, 255, 255, 0.02);
+  --border-glass: rgba(255, 255, 255, 0.06);
+  --border-glass-hover: rgba(139, 92, 246, 0.25);
+  
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-void);
+  font-family: var(--font-geist);
+  color: #e5e2e1;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Retrofuturistic Dot Grid & Radial Gradients */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.25;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.03) 0%, transparent 45%);
+}
+
+/* Glassmorphic Minimal Card */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover:hover {
+  border-color: var(--border-glass-hover);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 20px rgba(139, 92, 246, 0.05);
+  transform: translateY(-2px);
+}
+
+/* High Contrast Mono labels */
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.3);
+}
+
+/* Animation utilities */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.25);
+  }
+}
+
+.active-input-glow:focus-within {
+  animation: pulseGlow 3s infinite ease-in-out;
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+/* Smooth Fade/Slide In */
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Neon Text Glow */
+.text-neon-glow-violet {
+  text-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+}
+
+.text-neon-glow-emerald {
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
