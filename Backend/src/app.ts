@@ -2,6 +2,7 @@ import { randomBytes } from "node:crypto";
 import express from "express";
 import type { NextFunction, Request, Response } from "express";
 import cors from "cors";
+import morgan from "morgan";
 import z from "zod";
 import { runBattle } from "./ai/graph.ai.js";
 import { MODEL_OPTIONS, type ModelRegistry } from "./ai/model.ai.js";
@@ -52,6 +53,10 @@ export function createApp(options: AppOptions = {}) {
         methods: ["GET", "POST", "DELETE"],
         credentials: true,
     }));
+
+    if (process.env.NODE_ENV === "production") {
+        app.use(morgan("combined"));
+    }
 
     // Cheap liveness check. The frontend calls this on load instead of running the whole graph (and spending API credits).
     app.get("/health", (_req, res) => {
